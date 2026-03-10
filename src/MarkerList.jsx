@@ -17,26 +17,28 @@ const MarkerList = ({ markers, setModal, handleDelete }) => {
                   </tr>
                </thead>
                <tbody>
-                  {markers.map((marker) => (
-                     <tr key={marker.id}>
-                        <td className="p-2 border-b">{marker.id}</td>
-                        <td className="p-2 border-b">{marker.title}</td>
-                        <td className="p-2 border-b">
-                           ({marker.position[0]}, {marker.position[1]})
-                        </td>
-                        <td className="p-2 border-b text-center">
-                           <button className="p-1 mx-1 bg-yellow-400 rounded cursor-pointer">
-                              Modifier
-                           </button>
-                           <button
-                              onClick={() => handleDelete(marker.id)}
-                              className="p-1 mx-1 bg-red-400 rounded cursor-pointer"
-                           >
-                              Supprimer
-                           </button>
-                        </td>
-                     </tr>
-                  ))}
+                  {markers
+                     .sort((a, b) => a.id - b.id)
+                     .map((marker) => (
+                        <tr key={marker.id}>
+                           <td className="p-2 border-b">{marker.id}</td>
+                           <td className="p-2 border-b">{marker.title}</td>
+                           <td className="p-2 border-b">
+                              ({marker.position[0]}, {marker.position[1]})
+                           </td>
+                           <td className="p-2 border-b text-center">
+                              <button className="p-1 mx-1 bg-yellow-400 rounded cursor-pointer">
+                                 Modifier
+                              </button>
+                              <button
+                                 onClick={() => handleDelete(marker.id)}
+                                 className="p-1 mx-1 bg-red-400 rounded cursor-pointer"
+                              >
+                                 Supprimer
+                              </button>
+                           </td>
+                        </tr>
+                     ))}
                </tbody>
             </table>
             <hr className="opacity-20" />

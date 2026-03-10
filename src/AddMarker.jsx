@@ -9,26 +9,17 @@ const AddMarker = ({ setModal, markers, setMarkers }) => {
          .split(",")
          .map((coord) => parseFloat(coord.trim()));
       const newMarker = {
-         id: markers.length + 1,
+         id: markers.sort((a, b) => b.id - a.id)[0].id + 1,
          title,
          position: [lat, long],
       };
-
-      console.log(newMarker);
 
       setMarkers((prev) => [...prev, newMarker]);
       setModal(false);
    };
 
-   const handleModal = () => {
-      setModal(false);
-   };
-
    return (
-      <div
-         // onClick={() => handleModal()}
-         className="fixed inset-0 z-50 grid place-items-center"
-      >
+      <div className="fixed inset-0 z-50 grid place-items-center">
          <div className="absolute flex flex-col w-90 z-70 bg-white rounded-xl">
             <h2 className="p-4 text-2xl">Ajouter un marqueur</h2>
             <hr className="opacity-20" />
@@ -61,7 +52,7 @@ const AddMarker = ({ setModal, markers, setMarkers }) => {
             <hr className="opacity-20" />
             <div className="flex w-full justify-end">
                <button
-                  onClick={() => handleModal}
+                  onClick={() => setModal(false)}
                   className="w-fit p-1 m-4 bg-gray-400 rounded cursor-pointer"
                >
                   Fermer
