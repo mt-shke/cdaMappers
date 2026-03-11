@@ -1,9 +1,6 @@
-const MarkerList = ({ markers, setModal, handleDelete }) => {
+const MarkerList = ({ markers, setModal, handleDelete, setSelected }) => {
    return (
-      <div
-         onClick={() => setModal(false)}
-         className="fixed inset-0 z-50 grid place-items-center"
-      >
+      <div className="fixed inset-0 z-50 grid place-items-center">
          <div className="absolute flex flex-col w-[800px] z-50 bg-white rounded-xl">
             <h2 className="p-4 text-2xl">Liste des marqueurs</h2>
             <hr className="opacity-20" />
@@ -27,7 +24,13 @@ const MarkerList = ({ markers, setModal, handleDelete }) => {
                               ({marker.position[0]}, {marker.position[1]})
                            </td>
                            <td className="p-2 border-b text-center">
-                              <button className="p-1 mx-1 bg-yellow-400 rounded cursor-pointer">
+                              <button
+                                 onClick={() => [
+                                    setModal("update"),
+                                    setSelected(marker.id),
+                                 ]}
+                                 className="p-1 mx-1 bg-yellow-400 rounded cursor-pointer"
+                              >
                                  Modifier
                               </button>
                               <button
